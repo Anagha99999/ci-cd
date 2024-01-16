@@ -25,13 +25,13 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/viewProducts")
     public ResponseEntity<List<Product>> getAllProducts() {
         ArrayList<Product> products = (ArrayList<Product>) productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
-    @PostMapping("/products/add")
+    @PostMapping("/addProduct")
     public ResponseEntity<Product> AddProduct(@RequestBody Product product) {
         Product p = productService.AddNewProduct(product);
         return ResponseEntity.ok(p);

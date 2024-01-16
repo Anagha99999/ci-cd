@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService{
         Optional<Product> product1=productRepository.findById(id);
         if(!product1.isPresent())
         {
-           throw new ProductNotFoundException("product not found");
+           throw new ProductNotFoundException("product is not found");
         }
         Product p=product1.get();
         productRepository.deleteById(id);

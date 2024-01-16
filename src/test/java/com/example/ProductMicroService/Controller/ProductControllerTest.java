@@ -37,14 +37,14 @@ public class ProductControllerTest {
     @Test
     void getAllProductsSuccess() throws Exception {
         List<Product> products=new ArrayList<>();
-        products.add(new Product(1,"prod1","category1",54.55));
-        products.add(new Product(2,"prod2","category2",66.55));
+        products.add(new Product(1,"Prod1","Category1",54.55));
+        products.add(new Product(2,"Prod2","Category2",66.55));
 
         when(productService.getAllProducts()).thenReturn(products);
 
         List<Product> prods=productService.getAllProducts();
         assertEquals(products,prods);
-        mockMVC.perform(MockMvcRequestBuilders.get("/products").contentType(MediaType.APPLICATION_JSON))
+        mockMVC.perform(MockMvcRequestBuilders.get("/viewProducts").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
@@ -56,7 +56,7 @@ public class ProductControllerTest {
 
         assertEquals(0, products.size());
 
-        mockMVC.perform(MockMvcRequestBuilders.get("/products").contentType(MediaType.APPLICATION_JSON))
+        mockMVC.perform(MockMvcRequestBuilders.get("/viewProducts").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
@@ -74,7 +74,7 @@ public class ProductControllerTest {
         products.add(product);
 
         assertEquals(1,products.size());
-        mockMVC.perform(MockMvcRequestBuilders.post("/products/add").contentType(MediaType.APPLICATION_JSON)
+        mockMVC.perform(MockMvcRequestBuilders.post("/addProduct").contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(product)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -84,7 +84,7 @@ public class ProductControllerTest {
         when(productService.AddNewProduct(any())).thenReturn(null);
         Product p=null;
         assertNull(p);
-        mockMVC.perform(MockMvcRequestBuilders.post("/products/add").contentType(MediaType.APPLICATION_JSON)
+        mockMVC.perform(MockMvcRequestBuilders.post("/addProduct").contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(null)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
